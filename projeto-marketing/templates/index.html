@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Marketing</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/charts.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Análise de Clientes e Campanhas</h1>
+        
+        <section class="dashboard">
+            <div class="chart-container">
+                <h2>Distribuição de Clientes por Cluster</h2>
+                <canvas id="clusterChart"></canvas>
+                <div id="clusterInfo"></div>
+            </div>
+            
+            <div class="chart-container">
+                <h2>Performance das Campanhas</h2>
+                <div class="campaign-charts">
+                    <canvas id="roiChart"></canvas>
+                    <canvas id="spendingChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h2>Clientes de Alto Valor</h2>
+                <canvas id="clvChart"></canvas>
+                <div id="highValueInfo"></div>
+            </div>
+            
+            <div class="recommendations">
+                <h2>Recomendações de Marketing</h2>
+                <ul id="recommendationsList"></ul>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        // Carregar dados da API
+        fetch('/api/analysis')
+            .then(response => response.json())
+            .then(data => {
+                window.marketingData = data;
+                initializeCharts();
+                updateRecommendations();
+            });
+    </script>
+</body>
+</html>
